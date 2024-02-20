@@ -1,0 +1,40 @@
+version: "3"
+services:
+  web:
+    build: apache
+    env_file:
+      - .env
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./app:/app
+      - ./apache/exemplo.lan.conf:/etc/apache2/sites-enabled/exemplo.lan.conf
+      - ./exemplo.lan.pem:/etc/ssl/certs/exemplo.lan.pem
+      - ./exemplo.lan.key:/etc/ssl/private/exemplo.lan.key
+      - ./apache/A22AdrianRV.giize.com.pem:/etc/ssl/certs/A22AdrianRV.giize.com.pem
+      - ./apache/A22AdrianRV.giize.com.key:/etc/ssl/private/A22AdrianRV.giize.com.key
+  basedatos:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD_HASH: bba2d1bec283dd3b90add09797a9235b08069064
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: abc123.
+    volumes:
+      - datos:/var/lib/mysql
+      - ./bd/backup.sql:/docker-entrypoint-initdb.d/backup.sql
+      - ./bd:/bd
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: basedatos
+      MYSQL_ROOT_PASSWORD: abc123.
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: abc123.
+
+volumes:
+  datos:
