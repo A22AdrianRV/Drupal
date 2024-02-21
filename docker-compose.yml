@@ -17,7 +17,7 @@ services:
   basedatos:
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD_HASH: bba2d1bec283dd3b90add09797a9235b08069064
+      MARIADB_ROOT_PASSWORD: abc123.
       MYSQL_DATABASE: db
       MYSQL_USER: user
       MYSQL_PASSWORD: abc123.
