@@ -76,16 +76,17 @@
  * specific needs.
  *
  * @code
- * $databases['default']['default'] = [
- *   'database' => 'databasename',
- *   'username' => 'sql_username',
- *   'password' => 'sql_password',
- *   'host' => 'localhost',
- *   'port' => '3306',
- *   'driver' => 'mysql',
- *   'prefix' => '',
- *   'collation' => 'utf8mb4_general_ci',
- * ];
+ * /
+  $databases['default']['default'] = [
+    'database' => 'databasename',
+    'username' => 'sql_username',
+    'password' => 'sql_password',
+    'host' => 'localhost',
+    'port' => '3306',
+    'driver' => 'mysql',
+    'prefix' => '',
+    'collation' => 'utf8mb4_general_ci',
+  ];
  * @endcode
  */
 $databases = [];
@@ -882,14 +883,14 @@ $settings['migrate_node_migrate_type_classic'] = FALSE;
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
 $databases['default']['default'] = array (
-  'database' => 'db',
-  'username' => 'user',
-  'password' => 'abc123.',
-  'prefix' => 'drupal_',
-  'host' => 'basedatos',
-  'port' => '3306',
+  'database' => getenv('DB_NAME'),
+  'username' => getenv('DB_USER'),
+  'password' => getenv('DB_PASSWORD'),
+  'prefix' => getenv('DB_PREFIX'),
+  'host' => getenv('DB_HOST'),
+  'port' => getenv('DB_PORT'),
   'isolation_level' => 'READ COMMITTED',
-  'driver' => 'mysql',
+  'driver' => 'mariadb',
   'namespace' => 'Drupal\\mysql\\Driver\\Database\\mysql',
   'autoload' => 'core/modules/mysql/src/Driver/Database/mysql/',
 );
